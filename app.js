@@ -3,20 +3,12 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import blogRouter from "./routes/blog-routes.js";
 import router from "./routes/user-routes.js";
-import cors from "cors";
-
+import cors from "cors"; // Import cors using ES module syntax
 
 dotenv.config();
 const app = express();
 
-
-const corsOptions ={
-  origin:'http://localhost:3000', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
-
+app.use(cors()); // Use cors middleware here
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,3 +23,4 @@ mongoose
   .then(() => app.listen(PORT))
   .then(() => console.log(`Connected To Database and listening at PORT ${PORT}`))
   .catch((err) => console.log(err));
+
