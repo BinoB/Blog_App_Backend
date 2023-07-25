@@ -4,13 +4,27 @@ import dotenv from "dotenv";
 import blogRouter from "./routes/blog-routes.js";
 import router from "./routes/user-routes.js";
 import cors from "cors";
+import  { createProxyMiddleware } from "http-proxy-middleware";
 
 dotenv.config();
 const app = express();
 
-const allowedOrigins = ["http://localhost:3000"];
+/* const allowedOrigins = ["http://localhost:3000"]; */
+
+const allowedOrigin = "http://localhost:3000";
 
 app.use(
+  "/api",
+  createProxyMiddleware({
+    target: "https://blog-dcwf.onrender.com",
+    changeOrigin: true,
+    secure: false,
+    headers: {
+      origin: allowedOrigin,
+    },
+  })
+);
+/* app.use(
   cors({
     origin: function (origin, callback) {
       // Check if the request origin is allowed or if it's a request from the same server
@@ -19,7 +33,7 @@ app.use(
     },
     credentials: true, // If your frontend sends cookies, you might need this option
   })
-);
+); */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
