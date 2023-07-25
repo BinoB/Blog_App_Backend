@@ -7,10 +7,19 @@ import cors from "cors";
 
 dotenv.config();
 const app = express();
-/* app.use(cors()); */
-app.use(cors({
-  origin: "*",
-}));
+
+const allowedOrigins = ["http://localhost:3000"];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Check if the request origin is allowed or if it's a request from the same server
+      const isAllowed = allowedOrigins.includes(origin) || !origin;
+      callback(null, isAllowed);
+    },
+    credentials: true, // If your frontend sends cookies, you might need this option
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +32,5 @@ const PORT = process.env.PORT || 8000;
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => app.listen(PORT))
-  .then(() =>
-    console.log(`Connected To Database and listening at PORT ${PORT}`)
-  )
+  .then(() => console.log(`Connected To Database and listening at PORT ${PORT}`))
   .catch((err) => console.log(err));
