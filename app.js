@@ -8,7 +8,13 @@ import cors from "cors"; // Import cors using ES module syntax
 dotenv.config();
 const app = express();
 
-app.use(cors()); // Use cors middleware here
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://blog-app-pink-mu.vercel.app"],
+    credentials: true,
+  })
+);
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
