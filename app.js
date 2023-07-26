@@ -8,12 +8,7 @@ import cors from "cors"; // Import cors using ES module syntax
 dotenv.config();
 const app = express();
 
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://heroic-axolotl-3f0ac5.netlify.app"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 
 app.use(express.json());
