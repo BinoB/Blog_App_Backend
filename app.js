@@ -3,17 +3,12 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import blogRouter from "./routes/blog-routes.js";
 import router from "./routes/user-routes.js";
-import cors from "cors";
+import cors from "cors"; // Import cors using ES module syntax
 
 dotenv.config();
 const app = express();
 
-app.use(
-  cors({
-    origin: ["https://fantastic-halva-5e3300.netlify.app"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 
 app.use(express.json());
