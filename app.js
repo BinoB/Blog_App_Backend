@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://blog-app-pink-mu.vercel.app"],
+    origin: ["http://localhost:3000", "https://heroic-axolotl-3f0ac5.netlify.app"],
     credentials: true,
   })
 );
