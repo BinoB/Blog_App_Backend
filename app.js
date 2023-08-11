@@ -8,7 +8,12 @@ import cors from "cors"; // Import cors using ES module syntax
 dotenv.config();
 const app = express();
 
-app.use(cors());
+/* app.use(cors()); */
+const allowedOrigins = ['https://heroic-axolotl-3f0ac5.netlify.app'];
+app.use(cors({
+  origin: allowedOrigins
+}));
+
 
 
 app.use(express.json());
