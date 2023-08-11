@@ -9,15 +9,17 @@ dotenv.config();
 const app = express();
 
 /* app.use(cors()); */
-const allowedOrigins = ['https://heroic-axolotl-3f0ac5.netlify.app'];
-app.use(cors({
-  origin: allowedOrigins
-}));
+
 
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const allowedOrigins = ['https://heroic-axolotl-3f0ac5.netlify.app'];
+app.use(cors({
+  origin: allowedOrigins
+}));
 
 app.use("/api/user", router);
 app.use("/api/blog", blogRouter);
